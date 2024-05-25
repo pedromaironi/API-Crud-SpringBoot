@@ -1,33 +1,14 @@
-package com.pedromaironi.apicrud.model;
+package com.pedromaironi.apicrud.api.model;
 
-import jakarta.persistence.*;
+public class ProductsBody {
 
-@Entity
-@Table(name = "producto")
-public class Products {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     private int id;
-
-    @Column(name = "nombre", nullable = false, length = 1000)
     private String nombre;
-
-    @Column(name = "descripcion", nullable = false, length = 1000)
     private String descripcion;
-
-    @Column(name = "precio", nullable = false)
-    private Double precio;
-
-    @Column(name = "imagen", nullable = false, length = 1000)
+    private double precio;
     private String imagen;
-
-    @Column(name = "id_categoria", nullable = false)
     private int id_categoria;
-
-    @Column(name = "stock", nullable = false)
-    private Double stock;
+    private double stock;
 
     public int getId() {
         return id;
@@ -53,11 +34,11 @@ public class Products {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -77,11 +58,11 @@ public class Products {
         this.id_categoria = id_categoria;
     }
 
-    public Double getStock() {
+    public double getStock() {
         return stock;
     }
 
-    public void setStock(Double stock) {
+    public void setStock(double stock) {
         this.stock = stock;
     }
 }
