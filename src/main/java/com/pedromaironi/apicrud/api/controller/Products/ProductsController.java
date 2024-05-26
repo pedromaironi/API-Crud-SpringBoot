@@ -16,32 +16,41 @@ public class ProductsController {
     @Autowired
     private ProductsRepository productsRepository;
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping("/all")
     public List<Products> getProducts() {
         return productsRepository.findAll();
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Products> createProduct(
-            @RequestParam("nombre") String nombre,
-            @RequestParam("descripcion") String descripcion,
-            @RequestParam("precio") Double precio,
-            @RequestParam("imagen") String imagen,
-            @RequestParam("id_categoria") Integer id_categoria,
-            @RequestParam("stock") Double stock) {
+    public ResponseEntity<Products> createProduct(@RequestBody Products product) {
         try {
-            Products product = new Products();
-            product.setNombre(nombre);
-            product.setDescripcion(descripcion);
-            product.setPrecio(precio);
-            product.setImagen(imagen);
-            product.setId_categoria(id_categoria);
-            product.setStock(stock);
-
             Products savedProduct = productsRepository.save(product);
             return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Products> updateProduct(
+            @PathVariable("id") int id,
+            @RequestBody Products productDetails) {
+        Optional<Products> productData = productsRepository.findById(id);
+
+        if (productData.isPresent()) {
+            Products existingProduct = productData.get();
+            existingProduct.setNombre(productDetails.getNombre());
+            existingProduct.setDescripcion(productDetails.getDescripcion());
+            existingProduct.setPrecio(productDetails.getPrecio());
+            existingProduct.setImagen(productDetails.getImagen());
+            existingProduct.setId_categoria(productDetails.getId_categoria());
+            existingProduct.setStock(productDetails.getStock());
+
+            Products updatedProduct = productsRepository.save(existingProduct);
+            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

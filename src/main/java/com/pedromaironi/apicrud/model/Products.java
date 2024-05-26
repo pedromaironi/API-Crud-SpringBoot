@@ -8,32 +8,33 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private int id;
+    private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 1000)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false, length = 1000)
+    @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "precio", nullable = false)
+    @Column(name = "precio")
     private Double precio;
 
-    @Column(name = "imagen", nullable = false, length = 1000)
+    @Column(name = "imagen")
     private String imagen;
 
-    @Column(name = "id_categoria", nullable = false)
-    private int id_categoria;
+    @Column(name = "id_categoria")
+    private Integer id_categoria;
 
-    @Column(name = "stock", nullable = false)
+    @Column(name = "stock")
     private Double stock;
 
-    public int getId() {
+    // Getters and setters
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,11 +70,11 @@ public class Products {
         this.imagen = imagen;
     }
 
-    public int getId_categoria() {
+    public Integer getId_categoria() {
         return id_categoria;
     }
 
-    public void setId_categoria(int id_categoria) {
+    public void setId_categoria(Integer id_categoria) {
         this.id_categoria = id_categoria;
     }
 
